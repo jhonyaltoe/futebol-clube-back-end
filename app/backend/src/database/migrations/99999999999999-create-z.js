@@ -3,7 +3,7 @@ module.exports = {
     await queryInterface.createTable('trybe_eval', {
       id: {
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER, 
       }
     });
   },
