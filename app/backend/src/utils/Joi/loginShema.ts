@@ -1,20 +1,24 @@
 import * as Joi from 'joi';
 import HandleThrowError from '../ErrorHandle';
 
+const ALL_FILDEDS_MUST_BE_FILLED = 'All fields must be filled';
+
 const loginShema = Joi.object({
   email: Joi.string()
     .email()
     .required()
     .messages({
-      'string.email': 'The field email should be valid',
-      'any.required': 'All fields must be filled',
+      'string.email': 'Email must be valid',
+      'any.required': ALL_FILDEDS_MUST_BE_FILLED,
+      'string.empty': ALL_FILDEDS_MUST_BE_FILLED,
     }),
   password: Joi.string()
     .min(6)
     .required()
     .messages({
-      'string.min': 'Password must be at least 6 characters long',
-      'any.required': 'All fields must be filled',
+      'string.min': 'The password must be at least 6 characters long',
+      'any.required': ALL_FILDEDS_MUST_BE_FILLED,
+      'string.empty': ALL_FILDEDS_MUST_BE_FILLED,
     }),
 });
 
