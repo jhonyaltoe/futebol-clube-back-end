@@ -18,6 +18,7 @@ const Login = () => {
 
     try {
       const { token } = await requestLogin('/login', { email, password });
+      console.log(token);
 
       setToken(token);
 

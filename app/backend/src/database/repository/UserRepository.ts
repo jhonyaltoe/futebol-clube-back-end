@@ -8,6 +8,11 @@ class UserRepository {
     const user: IUser | null = await this.user.findOne({ where: { email } });
     return user;
   }
+
+  public async loginValidate(email: string) {
+    const user: IUser | null = await this.user.findOne({ where: { email } });
+    return user?.role;
+  }
 }
 
 export default UserRepository;
