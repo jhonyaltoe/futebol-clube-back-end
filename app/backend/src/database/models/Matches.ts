@@ -22,27 +22,33 @@ Matches.init({
   homeTeam: {
     type: INTEGER,
     allowNull: false,
+    // field: 'home_team',
   },
   homeTeamGoals: {
     type: INTEGER,
     allowNull: false,
+    // field: 'home_team_goals',
   },
   awayTeam: {
     type: INTEGER,
     allowNull: false,
+    // field: 'away_team',
   },
   awayTeamGoals: {
     type: INTEGER,
     allowNull: false,
+    // field: 'away_team_goals',
   },
   inProgress: {
     type: INTEGER,
     allowNull: false,
+    // field: 'in_progress',
   },
 }, {
   sequelize: db,
+  // underscored: true,
   timestamps: false,
-  modelName: 'matches',
+  // modelName: 'matches',
 });
 
 export default Matches;

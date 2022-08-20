@@ -12,7 +12,7 @@
     "prestart": "npm run build && npm run db:reset",
     "start": "node .",
     "predev": "npm run build && npm run db:reset",
-    "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
+    "dev": "nodemon -L --watch \"./src/**\" ./src/server.ts",
     "postinstall": "if [ ! -z 'cat ./packages.npm' ]; then npm i --ignore-scripts $(cat ./packages.npm); fi",
     "lint": "eslint ./src --ext .ts"
   },
@@ -57,6 +57,7 @@
     "dotenv": "10.0.0",
     "express": "4.17.1",
     "jest": "27.4.3",
+    "joi": "^17.6.0",
     "jsonwebtoken": "8.5.1",
     "mysql2": "2.3.3",
     "sequelize": "6.9.0"

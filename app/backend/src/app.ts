@@ -1,4 +1,6 @@
 import * as express from 'express';
+import route from './routes/router';
+import errorHandler from './middlewares/errorHandler';
 
 class App {
   public app: express.Express;
@@ -21,6 +23,8 @@ class App {
     };
 
     this.app.use(express.json());
+    this.app.use(route);
+    this.app.use(errorHandler);
     this.app.use(accessControl);
   }
 

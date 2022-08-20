@@ -26,7 +26,7 @@ Users.init({
     type: STRING,
     allowNull: false,
   },
-  awayTeam: {
+  email: {
     type: STRING,
     allowNull: false,
   },
