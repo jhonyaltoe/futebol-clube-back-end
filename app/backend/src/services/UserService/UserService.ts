@@ -1,12 +1,14 @@
 import { compare } from 'bcryptjs';
-import IUser, { ILogin } from '../database/entities/IUser';
-import UserRepository from '../database/repository/UserRepository';
-import { jwtGenerator, HandleThrowError } from '../utils';
-import { Token } from './IUserService';
+import { jwtGenerator, HandleThrowError } from '../../utils';
+import IUser, { ILogin } from '../../database/entities/IUser';
+import UserRepository from '../../database/repository/UserRepository';
+import { Token } from '../IPersistanceService';
+import IUserService from './IUserService';
 
-class UserService {
+class UserService implements IUserService<IUser> {
   constructor(
-    private user = new UserRepository(),
+    private user: UserRepository,
+    private jwt: typeof jwtGenerator,
   ) {}
 
   public async login(login: ILogin): Promise<Token | void> {
@@ -25,7 +27,7 @@ class UserService {
     if (user === null) HandleThrowError('Incorrect email or password', 401);
   }
 
-  public async loginValidate(email: string) {
+  public async loginValidate(email: string): Promise<string | undefined> {
     const role: string | undefined = await this.user.loginValidate(email);
     if (!role) HandleThrowError('The user do not exist', 401);
     return role;
