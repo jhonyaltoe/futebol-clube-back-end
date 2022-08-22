@@ -3,7 +3,7 @@ import { jwtGenerator, HandleThrowError } from '../../utils';
 import IUser, { ILogin } from '../../database/entities/IUser';
 import UserRepository from '../../database/repository/UserRepository';
 import { Token } from '../IPersistanceService';
-import IUserService from './IUserService';
+import IUserService, { IToken } from './IUserService';
 
 class UserService implements IUserService<IUser> {
   constructor(
@@ -27,10 +27,10 @@ class UserService implements IUserService<IUser> {
     if (user === null) HandleThrowError('Incorrect email or password', 401);
   }
 
-  public async loginValidate(email: string): Promise<string | undefined> {
+  public async loginValidate(email: string): Promise<IToken | undefined> {
     const role: string | undefined = await this.user.loginValidate(email);
     if (!role) HandleThrowError('The user do not exist', 401);
-    return role;
+    return role as IToken | undefined;
   }
 }
 

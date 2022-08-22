@@ -1,3 +1,3 @@
-import errorHandler from './errorHandler';
+import errorMiddleware from './errorMiddleware';
 
-export default errorHandler;
+export default errorMiddleware;
