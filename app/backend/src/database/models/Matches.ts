@@ -8,8 +8,6 @@ class Matches extends Model {
   awayTeam!: number;
   awayTeamGoals!: number;
   inProgress!: number;
-  createdAt!: Date;
-  updatedAt!: Date;
 }
 
 Matches.init({

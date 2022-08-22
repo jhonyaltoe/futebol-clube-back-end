@@ -5,5 +5,5 @@ export interface IToken {
 }
 
 export default interface IUserService<T> extends IPersistanceService<T> {
-  loginValidate(email: string): Promise<IToken | undefined>;
+  loginValidate(login: string): Promise<IToken | undefined>;
 }

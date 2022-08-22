@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import UserController from '../controllers/UserController';
 import Auth from '../middlewares/TokenAunth';
 import Validations from '../middlewares/Validations';
-import UserServiceFactory from '../services/UserService';
+import Factory from '../Factory';
 
-const userController = new UserController(UserServiceFactory.create());
+const userController = Factory.user();
 
 const userRouter = Router();
 

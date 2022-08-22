@@ -1,7 +1,6 @@
-import {  IUser } from '../../database/entities';
+import { IUser } from '../../database/entities';
 
 const fakeToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInVzZXJuYW1lIjoiQWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NjExODU0NjV9.nw-WFr0Uo0V_T_A0Kf78PdBXezv56Vw0NfiqNJTkvgk";
-
 
 const Admin: IUser = {
   id: 1,

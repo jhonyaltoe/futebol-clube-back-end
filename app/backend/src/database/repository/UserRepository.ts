@@ -1,7 +1,7 @@
 import User from '../models/Users';
 import IUser from '../entities/IUser';
 
-class UserRepository {
+export default class UserRepository {
   private user = User;
 
   public async login(email: string): Promise<IUser | null> {
@@ -14,5 +14,3 @@ class UserRepository {
     return user?.role;
   }
 }
-
-export default UserRepository;

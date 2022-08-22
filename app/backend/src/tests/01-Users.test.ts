@@ -23,48 +23,48 @@ describe('01-Users', () => {
       beforeEach(async () => {
         sinon.stub(Users, 'findOne').resolves(null as null);
       });
-  
+
       it('01 - quando o email tem o formato errado', async () => {
         const { status, body } = await chai.request(app)
           .post('/login')
           .send({ ...fakeDate.post.request, email: 'wrongemail.com' });
-    
+
         expect(status).to.be.equal(400);
         expect(body).to.be.an('object');
         expect(body).to.be.deep.equal({
           message: 'Email must be valid'
         });
       })
-  
+
       it('02 - quando o email não existe', async () => {
         const { status, body } = await chai.request(app)
           .post('/login')
           .send({ ...fakeDate.post.request, email: 'donotexistkdf73278shk@donotexist.com' });
-    
+
         expect(status).to.be.equal(401);
         expect(body).to.be.an('object');
         expect(body).to.be.deep.equal({
           message: 'Incorrect email or password'
         });
       })
-  
+
       it('03 - quando o um campo não existe (email)', async () => {
         const { status, body } = await chai.request(app)
           .post('/login')
           .send({ password: fakeDate.post.request.password });
-  
+
         expect(status).to.be.equal(400);
         expect(body).to.be.an('object');
         expect(body).to.be.deep.equal({
           message: 'All fields must be filled'
         });
       })
-  
+
       it('04 - quando o password tem o formato errado', async () => {
         const { status, body } = await chai.request(app)
           .post('/login')
           .send({ ...fakeDate.post.request, password: '12345' });
-    
+
         expect(status).to.be.equal(400);
         expect(body).to.be.an('object');
         expect(body).to.be.deep.equal({
@@ -73,7 +73,6 @@ describe('01-Users', () => {
       })
     });
 
-    
     describe('Testa os casos de sucesso:', () => {
 
       beforeEach(() => {
@@ -84,7 +83,7 @@ describe('01-Users', () => {
         const { status, body } = await chai.request(app)
           .post('/login')
           .send(fakeDate.post.request);
-  
+
         expect(status).to.be.equal(200);
         expect(body).to.be.an('object');
         expect(body.token).to.be.an('string');
@@ -103,7 +102,7 @@ describe('01-Users', () => {
         const { status, body } = await chai.request(app)
           .get('/login/validate')
           .send();
-        
+
         expect(status).to.be.equal(401);
         expect(body).to.be.an('object');
         expect(body.message).to.be.equal('The token is required');
@@ -113,7 +112,7 @@ describe('01-Users', () => {
         const { status, body } = await chai.request(app)
           .get('/login/validate')
           .set('authorization', 'wrongtoken&6j6*j');
-        
+
         expect(status).to.be.equal(500);
         expect(body).to.be.an('object');
         expect(body).to.deep.equal({ message: 'jwt malformed' });
@@ -130,7 +129,7 @@ describe('01-Users', () => {
         const { status, body } = await chai.request(app)
           .get('/login/validate')
           .set('authorization', fakeDate.getOne.request.authorization);
-        
+
         expect(status).to.be.equal(200);
         expect(body).to.be.an('object');
         expect(body).to.deep.equal({ role: fakeDate.getOne.mock.role });

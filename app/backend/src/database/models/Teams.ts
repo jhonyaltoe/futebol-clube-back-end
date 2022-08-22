@@ -4,8 +4,6 @@ import db from '.';
 class Teams extends Model {
   id!: number;
   teamName!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
 }
 
 Teams.init({
@@ -18,6 +16,7 @@ Teams.init({
   teamName: {
     type: STRING,
     allowNull: false,
+    field: 'team_name',
   },
 }, {
   sequelize: db,

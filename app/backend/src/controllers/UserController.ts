@@ -3,7 +3,7 @@ import { controllerWrapper } from '../utils';
 import IUserService from '../services/UserService/IUserService';
 import { IUser } from '../database/entities';
 
-class UserController {
+export default class UserController {
   constructor(
     private user: IUserService<IUser>,
   ) {}
@@ -18,5 +18,3 @@ class UserController {
     return res.status(200).json({ role });
   });
 }
-
-export default UserController;
