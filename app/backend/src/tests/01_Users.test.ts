@@ -6,14 +6,14 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import Users from '../database/models/Users';
 import UserRepository from '../database/repository/UserRepository';
-import * as fakeDate from './fakeData/Users';
+import * as fakeData from './fakeData/Users';
 
 const userRepository = new UserRepository();
 
 chai.use(chaiHttp);
-
 const { expect } = chai;
-describe('01-Users', () => {
+
+describe('01_Users', () => {
   afterEach(sinon.restore);
   // let chaiHttpResponse: Response;
 
@@ -27,7 +27,7 @@ describe('01-Users', () => {
       it('01 - quando o email tem o formato errado', async () => {
         const { status, body } = await chai.request(app)
           .post('/login')
-          .send({ ...fakeDate.post.request, email: 'wrongemail.com' });
+          .send({ ...fakeData.post.request, email: 'wrongemail.com' });
 
         expect(status).to.be.equal(400);
         expect(body).to.be.an('object');
@@ -39,7 +39,7 @@ describe('01-Users', () => {
       it('02 - quando o email não existe', async () => {
         const { status, body } = await chai.request(app)
           .post('/login')
-          .send({ ...fakeDate.post.request, email: 'donotexistkdf73278shk@donotexist.com' });
+          .send({ ...fakeData.post.request, email: 'donotexistkdf73278shk@donotexist.com' });
 
         expect(status).to.be.equal(401);
         expect(body).to.be.an('object');
@@ -51,7 +51,7 @@ describe('01-Users', () => {
       it('03 - quando o um campo não existe (email)', async () => {
         const { status, body } = await chai.request(app)
           .post('/login')
-          .send({ password: fakeDate.post.request.password });
+          .send({ password: fakeData.post.request.password });
 
         expect(status).to.be.equal(400);
         expect(body).to.be.an('object');
@@ -63,7 +63,7 @@ describe('01-Users', () => {
       it('04 - quando o password tem o formato errado', async () => {
         const { status, body } = await chai.request(app)
           .post('/login')
-          .send({ ...fakeDate.post.request, password: '12345' });
+          .send({ ...fakeData.post.request, password: '12345' });
 
         expect(status).to.be.equal(400);
         expect(body).to.be.an('object');
@@ -76,13 +76,13 @@ describe('01-Users', () => {
     describe('Testa os casos de sucesso:', () => {
 
       beforeEach(() => {
-        sinon.stub(Users, 'findOne').resolves(fakeDate.post.mock as Users);
+        sinon.stub(Users, 'findOne').resolves(fakeData.post.mock as Users);
       })
 
       it('01 - quando "email" e "password" estão corretos na requisição', async () => {
         const { status, body } = await chai.request(app)
           .post('/login')
-          .send(fakeDate.post.request);
+          .send(fakeData.post.request);
 
         expect(status).to.be.equal(200);
         expect(body).to.be.an('object');
@@ -95,7 +95,7 @@ describe('01-Users', () => {
     describe('Testa casos de falha:', () => {
 
       beforeEach(async () => {
-        sinon.stub(Users, 'findOne').resolves(fakeDate.getOne.mock as Users);
+        sinon.stub(Users, 'findOne').resolves(fakeData.getOne.mock as Users);
       });
 
       it('01 - quando o token não e passado', async () => {
@@ -122,17 +122,17 @@ describe('01-Users', () => {
     describe('Testa casos de sucesso:', () => {
 
       beforeEach(async () => {
-        sinon.stub(Users, 'findOne').resolves(fakeDate.getOne.mock as Users);
+        sinon.stub(Users, 'findOne').resolves(fakeData.getOne.mock as Users);
       });
 
       it('01 - quando o token está correto', async () => {
         const { status, body } = await chai.request(app)
           .get('/login/validate')
-          .set('authorization', fakeDate.getOne.request.authorization);
+          .set('authorization', fakeData.getOne.request.authorization);
 
         expect(status).to.be.equal(200);
         expect(body).to.be.an('object');
-        expect(body).to.deep.equal({ role: fakeDate.getOne.mock.role });
+        expect(body).to.deep.equal({ role: fakeData.getOne.mock.role });
       })
     });
   });
