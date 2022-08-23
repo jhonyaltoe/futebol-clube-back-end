@@ -5,16 +5,16 @@ import { controllerWrapper } from '../utils';
 
 export default class TeamController {
   constructor(
-    private teamService: ITeamService<ITeams>,
+    private team: ITeamService<ITeams>,
   ) {}
 
   public getAll: RequestHandler = controllerWrapper(async (_req: Request, res: Response) => {
-    const teams = await this.teamService.getAll();
+    const teams = await this.team.getAll();
     res.status(200).json(teams);
   });
 
   public getOne: RequestHandler = controllerWrapper(async (req: Request, res: Response) => {
-    const team = await this.teamService.getOne(Number(req.params.id));
+    const team = await this.team.getOne(Number(req.params.id));
     res.status(200).json(team);
   });
 }
