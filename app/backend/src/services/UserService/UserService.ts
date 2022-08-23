@@ -2,7 +2,6 @@ import { compare } from 'bcryptjs';
 import { jwtGenerator, HandleThrowError } from '../../utils';
 import IUser, { ILogin } from '../../database/entities/IUser';
 import UserRepository from '../../database/repository/UserRepository';
-import { Token } from '../IPersistanceService';
 import IUserService, { IToken } from './IUserService';
 
 class UserService implements IUserService<IUser> {
@@ -11,7 +10,7 @@ class UserService implements IUserService<IUser> {
     private jwt: typeof jwtGenerator,
   ) {}
 
-  public async login(login: ILogin): Promise<Token | void> {
+  public async login(login: ILogin): Promise<IToken | void> {
     const user: IUser | null = await this.user.login(login.email);
     if (user) {
       const isValid = await compare(login.password, user.password);

@@ -5,10 +5,7 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 import Teams from '../database/models/Teams';
-import TeamRepository from '../database/repository/TeamRepository';
 import * as fakeData from './fakeData/Teams';
-
-const teamsRepository = new TeamRepository();
 
 chai.use(chaiHttp);
 const { expect } = chai;

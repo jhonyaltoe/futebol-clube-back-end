@@ -1,9 +1,8 @@
-import IPersistanceService from '../IPersistanceService';
-
 export interface IToken {
   token: string;
 }
 
-export default interface IUserService<T> extends IPersistanceService<T> {
+export default interface IUserService<T> {
+  login(login: T): Promise<IToken | void>;
   loginValidate(login: string): Promise<IToken | undefined>;
 }
