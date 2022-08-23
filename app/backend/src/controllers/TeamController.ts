@@ -12,4 +12,9 @@ export default class TeamController {
     const teams = await this.teamService.getAll();
     res.status(200).json(teams);
   });
+
+  public getOne: RequestHandler = controllerWrapper(async (req: Request, res: Response) => {
+    const team = await this.teamService.getOne(Number(req.params.id));
+    res.status(200).json(team);
+  });
 }
