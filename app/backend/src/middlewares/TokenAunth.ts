@@ -6,13 +6,12 @@ import { HandleThrowError } from '../utils';
 export default class Auth {
   static tokenJWT = (req: Request, _res: Response, next: NextFunction) => {
     const { authorization } = req.headers;
-    // console.log(req.body);
 
     const user = (!authorization)
       ? HandleThrowError('The token is required', 401)
       : jwt.verify(authorization, process.env.JWT_SECRET as Secret);
 
-    req.body.user = user;
+    req.body.userAuth = user;
     next();
   };
 }
