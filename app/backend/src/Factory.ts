@@ -28,8 +28,9 @@ export default class Factory {
   }
 
   public static matche() {
+    const teamRepository = new TeamRepository();
     const matcheRepository = new MatcheRepository();
-    const matcheService = new MatcheService(matcheRepository);
+    const matcheService = new MatcheService(matcheRepository, teamRepository);
     const matcheController = new MatcheController(matcheService);
     return matcheController;
   }

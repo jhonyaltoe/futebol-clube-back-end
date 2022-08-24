@@ -7,11 +7,14 @@ export default class Auth {
   static tokenJWT = (req: Request, _res: Response, next: NextFunction) => {
     const { authorization } = req.headers;
 
-    const user = (!authorization)
-      ? HandleThrowError('The token is required', 401)
-      : jwt.verify(authorization, process.env.JWT_SECRET as Secret);
+    if (!authorization) HandleThrowError('The token is required', 401);
 
-    req.body.userAuth = user;
+    try {
+      const user = jwt.verify(authorization || 'undefined', process.env.JWT_SECRET as Secret);
+      req.body.userAuth = user;
+    } catch (e) {
+      HandleThrowError('Token must be a valid token', 401);
+    }
     next();
   };
 }
