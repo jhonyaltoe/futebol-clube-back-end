@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import Users from '../database/models/Users';
+import Users from '../database/models/User';
 import * as fakeData from './fakeData/Users';
 
 chai.use(chaiHttp);

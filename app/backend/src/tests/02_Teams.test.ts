@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import Teams from '../database/models/Teams';
+import Teams from '../database/models/Team';
 import * as fakeData from './fakeData/Teams';
 
 chai.use(chaiHttp);
