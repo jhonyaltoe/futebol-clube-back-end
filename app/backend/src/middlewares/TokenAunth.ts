@@ -3,9 +3,10 @@ import { Secret } from 'jsonwebtoken';
 import * as jwt from 'jsonwebtoken';
 import { HandleThrowError } from '../utils';
 
-class Auth {
+export default class Auth {
   static tokenJWT = (req: Request, _res: Response, next: NextFunction) => {
     const { authorization } = req.headers;
+    // console.log(req.body);
 
     const user = (!authorization)
       ? HandleThrowError('The token is required', 401)
@@ -15,5 +16,3 @@ class Auth {
     next();
   };
 }
-
-export default Auth;

@@ -12,6 +12,9 @@ module.exports = {
       homeTeam: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        foreignKey: true,
         references: {
           model: 'teams',
           key: 'id',
@@ -26,6 +29,9 @@ module.exports = {
       awayTeam: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        foreignKey: true,
         references: {
           model: 'teams',
           key: 'id',
@@ -41,6 +47,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         field: 'in_progress',
+        defaultValue: 1,
       },
     });
   },

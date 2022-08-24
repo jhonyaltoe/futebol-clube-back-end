@@ -1,17 +1,23 @@
-import Matches from '../models/Matches';
-import Teams from '../models/Teams';
-import { IMatchesFK } from '../entities/IMatches';
+import Matche from '../models/Matche';
+import Team from '../models/Team';
+import { IMatcheCreate, IMatche, IMatcheFK } from '../entities';
 
-export default class MatchesRepository {
-  private matches = Matches;
+export default class MatcheRepository {
+  private matche = Matche;
+  private team = Team;
 
-  public async getAll(): Promise<IMatchesFK[] | []> {
-    const matches: IMatchesFK[] | [] = await this.matches.findAll({
+  public async getAll(): Promise<IMatcheFK[]> {
+    const matches: IMatcheFK[] | [] = await this.matche.findAll({
       include: [
-        { model: Teams, as: 'teamHome', attributes: { exclude: ['id'] } },
-        { model: Teams, as: 'teamAway', attributes: { exclude: ['id'] } },
+        { model: this.team, as: 'teamHome', attributes: { exclude: ['id'] } },
+        { model: this.team, as: 'teamAway', attributes: { exclude: ['id'] } },
       ],
     });
     return matches;
+  }
+
+  public async saveMatch(matche: IMatcheCreate): Promise<IMatche> {
+    const newMatche = await this.matche.create({ ...matche });
+    return newMatche;
   }
 }

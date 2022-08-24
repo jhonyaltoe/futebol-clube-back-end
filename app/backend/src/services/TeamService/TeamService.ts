@@ -1,19 +1,18 @@
-import ITeams from '../../database/entities/ITeams';
+import ITeam from '../../database/entities/ITeam';
 import ITeamService from './ITeamService';
-// import Teams from '../../database/models/Teams';
 
-export default class TeamService implements ITeamService<ITeams> {
+export default class TeamService implements ITeamService<ITeam> {
   constructor(
-    private team: ITeamService<ITeams>,
+    private team: ITeamService<ITeam>,
   ) {}
 
-  public async getAll(): Promise<ITeams[]> {
-    const teams: ITeams[] = await this.team.getAll();
-    return teams as ITeams[];
+  public async getAll(): Promise<ITeam[]> {
+    const teams: ITeam[] = await this.team.getAll();
+    return teams as ITeam[];
   }
 
-  public async getOne(id: number): Promise<ITeams | null> {
-    const team: ITeams | null = await this.team.getOne(id);
+  public async getOne(id: number): Promise<ITeam | null> {
+    const team: ITeam | null = await this.team.getOne(id);
     return team;
   }
 }

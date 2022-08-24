@@ -24,10 +24,10 @@ class App {
     };
 
     this.app.use(express.json());
+    this.app.use(accessControl);
     this.app.use(cors());
     this.app.use(route);
     this.app.use(errorMiddleware);
-    this.app.use(accessControl);
   }
 
   public start(PORT: string | number):void {

@@ -1,11 +1,11 @@
 import { Request, Response, RequestHandler } from 'express';
 import ITeamService from '../services/TeamService/ITeamService';
-import ITeams from '../database/entities/ITeams';
+import ITeam from '../database/entities/ITeam';
 import { controllerWrapper } from '../utils';
 
 export default class TeamController {
   constructor(
-    private team: ITeamService<ITeams>,
+    private team: ITeamService<ITeam>,
   ) {}
 
   public getAll: RequestHandler = controllerWrapper(async (_req: Request, res: Response) => {

@@ -1,3 +1,9 @@
 import errorMiddleware from './errorMiddleware';
+import Aunth from './TokenAunth';
+import Validations from './Validations';
 
-export default errorMiddleware;
+export {
+  errorMiddleware,
+  Aunth,
+  Validations,
+};

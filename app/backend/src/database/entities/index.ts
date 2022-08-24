@@ -1,11 +1,12 @@
 import IUser, { ILogin } from './IUser';
-import ITeams from './ITeams';
-import IMatches, { IMatchesFK } from './IMatches';
+import ITeam from './ITeam';
+import IMatche, { IMatcheFK, IMatcheCreate } from './IMatche';
 
 export {
   IUser,
   ILogin,
-  ITeams,
-  IMatches,
-  IMatchesFK,
+  ITeam,
+  IMatche,
+  IMatcheFK,
+  IMatcheCreate,
 };
