@@ -12,8 +12,8 @@ export default class MatcheController {
     res.status(200).json(matches);
   });
 
-  public saveMatch = controllerWrapper(async (req: Request, res: Response) => {
-    const newMatche = await this.matcheService.saveMatch(req.body);
+  public createMatch = controllerWrapper(async (req: Request, res: Response) => {
+    const newMatche = await this.matcheService.createMatch(req.body);
     res.status(201).json(newMatche);
   });
 

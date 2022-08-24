@@ -16,14 +16,13 @@ export default class MatcheRepository {
     return matches;
   }
 
-  public async saveMatch(matche: IMatcheCreate): Promise<IMatche> {
+  public async createMatch(matche: IMatcheCreate): Promise<IMatche> {
     const newMatche = await this.matcheModel.create({ ...matche });
     return newMatche;
   }
 
   public async finishMatch(id: number): Promise<{ message: 'Finished' }> {
-    const finish = this.matcheModel.update({ inProgress: 0 }, { where: { id } });
-    console.log(finish);
+    await this.matcheModel.update({ inProgress: 0 }, { where: { id } });
     return { message: 'Finished' };
   }
 }

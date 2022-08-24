@@ -12,8 +12,8 @@ export default class MatcheService implements IMatcheService {
     return matches;
   }
 
-  public async saveMatch(matche: IMatcheCreate): Promise<IMatche> {
-    const newMatche = await this.matcheRepository.saveMatch(matche);
+  public async createMatch(matche: IMatcheCreate): Promise<IMatche> {
+    const newMatche = await this.matcheRepository.createMatch(matche);
     return newMatche;
   }
 
