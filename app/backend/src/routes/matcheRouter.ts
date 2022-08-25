@@ -13,5 +13,6 @@ matcheRouter.post(
   matcheController.createMatch,
 );
 matcheRouter.patch('/matches/:id/finish', matcheController.finishMatch);
+matcheRouter.patch('/matches/:id', matcheController.update);
 
 export default matcheRouter;

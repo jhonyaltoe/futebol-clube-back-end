@@ -1,4 +1,4 @@
-import { IMatche, IMatcheCreate, IMatcheFK } from '../../database/entities';
+import { IMatche, IMatcheCreate, IMatcheFK, ITeamGoals } from '../../database/entities';
 import IMatcheService from './IMatcheService';
 import MatcheRepository from '../../database/repository/MatcheRepository';
 import TeamRepository from '../../database/repository/TeamRepository';
@@ -10,7 +10,7 @@ export default class MatcheService implements IMatcheService {
     private teamRepository: TeamRepository,
   ) {}
 
-  private async teste(id: number) {
+  private async verifyIfHasTeam(id: number) {
     const hasTeam = await this.teamRepository.getOne(id);
     if (hasTeam === null) HandleThrowError('There is no team with such id!', 404);
   }
@@ -21,7 +21,8 @@ export default class MatcheService implements IMatcheService {
   }
 
   public async createMatch(matche: IMatcheCreate): Promise<IMatche> {
-    await Promise.all([this.teste(matche.homeTeam), this.teste(matche.awayTeam)]);
+    const toVerify = [matche.homeTeam, matche.awayTeam];
+    await Promise.all(toVerify.map((teamId) => this.verifyIfHasTeam(teamId)));
     const newMatche = await this.matcheRepository.createMatch(matche);
     return newMatche;
   }
@@ -29,5 +30,9 @@ export default class MatcheService implements IMatcheService {
   public async finishMatch(id: number): Promise<{ message: 'Finished' }> {
     const finish = await this.matcheRepository.finishMatch(id);
     return finish;
+  }
+
+  public async update(id: number, teamGoals: ITeamGoals): Promise<void> {
+    await this.matcheRepository.update(id, teamGoals);
   }
 }

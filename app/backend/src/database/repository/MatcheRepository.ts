@@ -1,6 +1,6 @@
 import Matche from '../models/Matche';
 import Team from '../models/Team';
-import { IMatcheCreate, IMatche, IMatcheFK } from '../entities';
+import { IMatcheCreate, IMatche, IMatcheFK, ITeamGoals } from '../entities';
 
 export default class MatcheRepository {
   private matcheModel = Matche;
@@ -24,5 +24,13 @@ export default class MatcheRepository {
   public async finishMatch(id: number): Promise<{ message: 'Finished' }> {
     await this.matcheModel.update({ inProgress: 0 }, { where: { id } });
     return { message: 'Finished' };
+  }
+
+  public async update(id: number, teamGoals: ITeamGoals): Promise<void> {
+    const { homeTeamGoals, awayTeamGoals } = teamGoals;
+    await this.matcheModel.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
   }
 }
