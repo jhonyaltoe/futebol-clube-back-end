@@ -3,20 +3,32 @@ export interface ITeamGoals {
   awayTeamGoals: number;
 }
 
-export default interface IMatche extends ITeamGoals {
+export default interface IMatche {
   id?: number;
   homeTeam: number;
   awayTeam: number;
+  homeTeamGoals: number;
+  awayTeamGoals: number;
   inProgress: boolean;
 }
 
 export interface IMatcheFK extends IMatche {
   teamHome?: {
     teamName: string;
-  }
+  };
   teamAway?: {
     teamName: string;
-  }
+  };
+}
+
+export interface IMatcheFKV extends IMatche {
+  id: number;
+  teamHome: {
+    teamName: string;
+  };
+  teamAway: {
+    teamName: string;
+  };
 }
 
 export interface IMatcheCreate {

@@ -1,4 +1,4 @@
-import { IMatche, IMatcheCreate, IMatcheFK, ITeamGoals } from '../../database/entities';
+import { IMatche, IMatcheCreate, IMatcheFKV, ITeamGoals } from '../../database/entities';
 import IMatcheService from './IMatcheService';
 import MatcheRepository from '../../database/repository/MatcheRepository';
 import TeamRepository from '../../database/repository/TeamRepository';
@@ -15,9 +15,9 @@ export default class MatcheService implements IMatcheService {
     if (hasTeam === null) HandleThrowError('There is no team with such id!', 404);
   }
 
-  public async getAll(): Promise<IMatcheFK[] | []> {
-    const matches = await this.matcheRepository.getAll();
-    return matches;
+  public async getAll(where?: object): Promise<IMatcheFKV[]> {
+    const matches = await this.matcheRepository.getAll(where);
+    return matches as IMatcheFKV[];
   }
 
   public async createMatch(matche: IMatcheCreate): Promise<IMatche> {

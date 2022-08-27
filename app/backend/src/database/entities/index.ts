@@ -1,6 +1,6 @@
 import IUser, { ILogin } from './IUser';
 import ITeam from './ITeam';
-import IMatche, { IMatcheFK, IMatcheCreate, ITeamGoals } from './IMatche';
+import IMatche, { IMatcheFK, IMatcheCreate, ITeamGoals, IMatcheFKV } from './IMatche';
 
 export {
   IUser,
@@ -10,4 +10,5 @@ export {
   IMatcheFK,
   IMatcheCreate,
   ITeamGoals,
+  IMatcheFKV,
 };

@@ -1,4 +1,4 @@
-import { jwtGenerator } from './utils';
+import { jwtGenerator, Leaderboard } from './utils';
 
 import UserRepository from './database/repository/UserRepository';
 import UserService from './services/UserService/UserService';
@@ -11,6 +11,8 @@ import TeamService from './services/TeamService/TeamService';
 import MatcheRepository from './database/repository/MatcheRepository';
 import MatcheService from './services/MatcheService/MatcheService';
 import MatcheController from './controllers/MatcheController';
+
+import LeaderboardController from './controllers/LeaderboardController';
 
 export default class Factory {
   public static user() {
@@ -33,5 +35,14 @@ export default class Factory {
     const matcheService = new MatcheService(matcheRepository, teamRepository);
     const matcheController = new MatcheController(matcheService);
     return matcheController;
+  }
+
+  public static leaderboard() {
+    const teamRepository = new TeamRepository();
+    const matcheRepository = new MatcheRepository();
+    const matcheService = new MatcheService(matcheRepository, teamRepository);
+    const leadboard = new Leaderboard();
+    const leaderboardController = new LeaderboardController(matcheService, leadboard);
+    return leaderboardController;
   }
 }

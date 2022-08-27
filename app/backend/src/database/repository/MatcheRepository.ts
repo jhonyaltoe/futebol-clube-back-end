@@ -1,19 +1,22 @@
 import Matche from '../models/Matche';
 import Team from '../models/Team';
-import { IMatcheCreate, IMatche, IMatcheFK, ITeamGoals } from '../entities';
+import { IMatcheCreate, IMatche, ITeamGoals, IMatcheFKV } from '../entities';
 
 export default class MatcheRepository {
   private matcheModel = Matche;
   private teamModel = Team;
 
-  public async getAll(): Promise<IMatcheFK[]> {
-    const matches: IMatcheFK[] | [] = await this.matcheModel.findAll({
+  public async getAll(where?: object): Promise<IMatcheFKV[] | void> {
+    const matches: any = await this.matcheModel.findAll({
       include: [
         { model: this.teamModel, as: 'teamHome', attributes: { exclude: ['id'] } },
         { model: this.teamModel, as: 'teamAway', attributes: { exclude: ['id'] } },
       ],
+      where: { ...where },
+      raw: true,
+      nest: true,
     });
-    return matches;
+    return matches as IMatcheFKV[];
   }
 
   public async createMatch(matche: IMatcheCreate): Promise<IMatche> {

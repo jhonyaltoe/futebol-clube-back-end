@@ -18,7 +18,7 @@ describe('01_Users', () => {
     describe('Testa os casos de falha:', () => {
 
       beforeEach(async () => {
-        sinon.stub(Users, 'findOne').resolves(null as null);
+        sinon.stub(Users, 'findOne').resolves(null);
       });
 
       it('01 - quando o email tem o formato errado', async () => {
