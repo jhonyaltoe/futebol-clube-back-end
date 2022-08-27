@@ -38,7 +38,7 @@ export default class Leaderboard {
     return 1;
   };
 
-  private GFO = (teamInfo: ITeamInfo, match: IMatcheBoard, option: IFavorOwn) => {
+  private sumGoals = (teamInfo: ITeamInfo, match: IMatcheBoard, option: IFavorOwn) => {
     const goals: ILocalGoals = option === 'goalsFavor' ? this.localGoals : this.rvLocalGoals;
     if (teamInfo) return teamInfo[option] + match[goals];
     return match[goals];
@@ -51,9 +51,10 @@ export default class Leaderboard {
     totalVictories: teamInfo ? teamInfo.totalVictories + this.wdlAttr.win : this.wdlAttr.win,
     totalDraws: teamInfo ? teamInfo.totalDraws + this.wdlAttr.draw : this.wdlAttr.draw,
     totalLosses: teamInfo ? teamInfo.totalLosses + this.wdlAttr.lose : this.wdlAttr.lose,
-    goalsFavor: this.GFO(teamInfo, match, 'goalsFavor'),
-    goalsOwn: this.GFO(teamInfo, match, 'goalsOwn'),
-    goalsBalance: this.GFO(teamInfo, match, 'goalsFavor') - this.GFO(teamInfo, match, 'goalsOwn'),
+    goalsFavor: this.sumGoals(teamInfo, match, 'goalsFavor'),
+    goalsOwn: this.sumGoals(teamInfo, match, 'goalsOwn'),
+    goalsBalance: this.sumGoals(teamInfo, match, 'goalsFavor')
+      - this.sumGoals(teamInfo, match, 'goalsOwn'),
     efficiency: +this.calcEfficiency(this.calcPoints(teamInfo), this.hdTotalGames(teamInfo)),
   });
 
@@ -70,16 +71,12 @@ export default class Leaderboard {
     board.sort((a, b) => {
       if (a.totalPoints > b.totalPoints) return -1;
       if (a.totalPoints < b.totalPoints) return 1;
-
       if (a.totalVictories > b.totalVictories) return -1;
       if (a.totalVictories < b.totalVictories) return 1;
-
       if (a.goalsBalance > b.goalsBalance) return -1;
       if (a.goalsBalance < b.goalsBalance) return 1;
-
       if (a.goalsFavor > b.goalsFavor) return -1;
       if (a.goalsFavor < b.goalsFavor) return 1;
-
       if (a.goalsOwn > b.goalsOwn) return -1;
       if (a.goalsOwn < b.goalsOwn) return 1;
       return 0;

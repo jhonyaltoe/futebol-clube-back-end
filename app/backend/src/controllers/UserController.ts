@@ -9,7 +9,6 @@ export default class UserController {
   ) {}
 
   public login: RequestHandler = controllerWrapper(async (req: Request, res: Response) => {
-    console.log(req.body);
     const token = await this.user.login(req.body);
     return res.status(200).json(token);
   });
