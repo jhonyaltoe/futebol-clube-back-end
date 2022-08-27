@@ -13,4 +13,10 @@ export default class LeaderboardController {
     const orded = this.leaderboard.generate(matches, 'homeTeam');
     res.status(200).json(orded);
   });
+
+  public awayTeamboard = controllerWrapper(async (_req: Request, res: Response) => {
+    const matches = await this.matcheService.getAll({ inProgress: false });
+    const orded = this.leaderboard.generate(matches, 'awayTeam');
+    res.status(200).json(orded);
+  });
 }
