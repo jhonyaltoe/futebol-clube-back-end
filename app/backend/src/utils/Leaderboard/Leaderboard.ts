@@ -101,4 +101,22 @@ export default class Leaderboard {
     this.leaderboadArr = [];
     return this.sort(result);
   }
+
+  public bothLeaderboards = (matches: IMatcheFKV[]): ILeaderboardResult[] => {
+    const firstBoardArr = this.generate(matches, 'homeTeam');
+    const secondBoardArr = this.generate(matches, 'awayTeam');
+    const orderArr = firstBoardArr.map((f) => secondBoardArr.find((s) => s.name === f.name));
+    firstBoardArr.forEach((e, i) => {
+      e.totalPoints += (orderArr[i]?.totalPoints || 0);
+      e.totalGames += (orderArr[i]?.totalGames || 0);
+      e.totalVictories += (orderArr[i]?.totalVictories || 0);
+      e.totalDraws += (orderArr[i]?.totalDraws || 0);
+      e.totalLosses += (orderArr[i]?.totalLosses || 0);
+      e.goalsFavor += (orderArr[i]?.goalsFavor || 0);
+      e.goalsOwn += (orderArr[i]?.goalsOwn || 0);
+      e.goalsBalance = e.goalsFavor - e.goalsOwn;
+      e.efficiency = +this.calcEfficiency(e.totalPoints, e.totalGames);
+    });
+    return this.sort(firstBoardArr);
+  };
 }

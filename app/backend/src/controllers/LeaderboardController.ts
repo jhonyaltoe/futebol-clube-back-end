@@ -19,4 +19,10 @@ export default class LeaderboardController {
     const orded = this.leaderboard.generate(matches, 'awayTeam');
     res.status(200).json(orded);
   });
+
+  public bothTeamboard = controllerWrapper(async (_req: Request, res: Response) => {
+    const matches = await this.matcheService.getAll({ inProgress: false });
+    const both = this.leaderboard.bothLeaderboards(matches);
+    res.status(200).json(both);
+  });
 }
