@@ -6,9 +6,7 @@
   "scripts": {
     "postinstall": "npm run install:apps",
     "install:apps": "./apps_install.sh",
-    "pretest": "(cd ./app/backend && /bin/sh tsc_eval.sh)",
     "test": "env $(cat ./app/backend/.env) jest -i --forceExit --verbose",
-    "test:browser": "SHOW_BROWSER=true npm test",
     "test:debug": "DEBUG=true npm test",
     "compose:up": "(cd app && docker-compose up -d --build)",
     "compose:down": "(cd app && docker-compose down --remove-orphans)",
@@ -34,7 +32,6 @@
     "camelcase": "6.3.0",
     "http-status-codes": "2.2.0",
     "jsonwebtoken": "8.5.1",
-    "puppeteer": "13.2.0",
     "uuid": "8.3.2"
   }
 }
