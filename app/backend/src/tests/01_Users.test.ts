@@ -6,6 +6,7 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import Users from '../database/models/User';
 import * as fakeData from './fakeData/Users';
+import * as jwt from 'jsonwebtoken';
 
 chai.use(chaiHttp);
 const { expect } = chai;
@@ -23,32 +24,28 @@ describe('01_Users', () => {
 
       it('01 - quando o email tem o formato errado', async () => {
         const { status, body } = await chai.request(app)
-          .post('/login')
-          .send({ ...fakeData.post.request, email: 'wrongemail.com' });
+          .post(fakeData.loginValidate.path)
+          .send({ ...fakeData.loginValidate.req, email: 'wrongemail.com' });
 
         expect(status).to.be.equal(400);
         expect(body).to.be.an('object');
-        expect(body).to.be.deep.equal({
-          message: 'Email must be valid'
-        });
+        expect(body).to.be.deep.equal({ message: 'Email must be valid' });
       })
 
       it('02 - quando o email não existe', async () => {
         const { status, body } = await chai.request(app)
-          .post('/login')
-          .send({ ...fakeData.post.request, email: 'donotexistkdf73278shk@donotexist.com' });
+          .post(fakeData.loginValidate.path)
+          .send({ ...fakeData.loginValidate.req, email: 'donotexistkdf73278shk@donotexist.com' });
 
         expect(status).to.be.equal(401);
         expect(body).to.be.an('object');
-        expect(body).to.be.deep.equal({
-          message: 'Incorrect email or password'
-        });
+        expect(body).to.be.deep.equal({ message: 'Incorrect email or password' });
       })
 
       it('03 - quando o um campo não existe (email)', async () => {
         const { status, body } = await chai.request(app)
-          .post('/login')
-          .send({ password: fakeData.post.request.password });
+          .post(fakeData.loginValidate.path)
+          .send({ password: fakeData.loginValidate.req.password });
 
         expect(status).to.be.equal(400);
         expect(body).to.be.an('object');
@@ -59,8 +56,8 @@ describe('01_Users', () => {
 
       it('04 - quando o password tem o formato errado', async () => {
         const { status, body } = await chai.request(app)
-          .post('/login')
-          .send({ ...fakeData.post.request, password: '12345' });
+          .post(fakeData.loginValidate.path)
+          .send({ ...fakeData.loginValidate.req, password: '12345' });
 
         expect(status).to.be.equal(400);
         expect(body).to.be.an('object');
@@ -73,13 +70,13 @@ describe('01_Users', () => {
     describe('Testa os casos de sucesso:', () => {
 
       beforeEach(() => {
-        sinon.stub(Users, 'findOne').resolves(fakeData.post.mock as Users);
+        sinon.stub(Users, 'findOne').resolves(fakeData.loginValidate.mock as Users);
       })
 
       it('01 - quando "email" e "password" estão corretos na requisição', async () => {
         const { status, body } = await chai.request(app)
-          .post('/login')
-          .send(fakeData.post.request);
+          .post(fakeData.loginValidate.path)
+          .send(fakeData.loginValidate.req);
 
         expect(status).to.be.equal(200);
         expect(body).to.be.an('object');
@@ -92,44 +89,44 @@ describe('01_Users', () => {
     describe('Testa casos de falha:', () => {
 
       beforeEach(async () => {
-        sinon.stub(Users, 'findOne').resolves(fakeData.getOne.mock as Users);
+        sinon.stub(Users, 'findOne').resolves(fakeData.login.mock as Users);
       });
 
       it('01 - quando o token não e passado', async () => {
         const { status, body } = await chai.request(app)
-          .get('/login/validate')
+          .get(fakeData.login.path)
           .send();
 
         expect(status).to.be.equal(401);
         expect(body).to.be.an('object');
-        expect(body.message).to.be.equal('The token is required');
+        expect(body).to.deep.equal({ message: 'The token is required' });
       })
 
       it('02 - quando o token está errado', async () => {
         const { status, body } = await chai.request(app)
-          .get('/login/validate')
+          .get(fakeData.login.path)
           .set('authorization', 'wrongtoken&6j6*j');
 
-        expect(status).to.be.equal(500);
+        expect(status).to.be.equal(401);
         expect(body).to.be.an('object');
-        expect(body).to.deep.equal({ message: 'jwt malformed' });
+        expect(body).to.deep.equal({ message: 'Token must be a valid token' });
       })
     });
 
     describe('Testa casos de sucesso:', () => {
-
       beforeEach(async () => {
-        sinon.stub(Users, 'findOne').resolves(fakeData.getOne.mock as Users);
+        sinon.stub(Users, 'findOne').resolves(fakeData.login.mock as Users);
+        sinon.stub(jwt, 'verify').resolves(fakeData.login.mock as Users);
       });
 
       it('01 - quando o token está correto', async () => {
         const { status, body } = await chai.request(app)
-          .get('/login/validate')
-          .set('authorization', fakeData.getOne.request.authorization);
+          .get(fakeData.login.path)
+          .set('authorization', fakeData.login.req.authorization);
 
         expect(status).to.be.equal(200);
         expect(body).to.be.an('object');
-        expect(body).to.deep.equal({ role: fakeData.getOne.mock.role });
+        expect(body).to.deep.equal({ role: fakeData.login.res });
       })
     });
   });

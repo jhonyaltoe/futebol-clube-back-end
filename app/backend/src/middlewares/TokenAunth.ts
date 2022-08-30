@@ -12,7 +12,7 @@ export default class Auth {
     try {
       const user = jwt.verify(authorization || 'undefined', process.env.JWT_SECRET as Secret);
       req.body.userAuth = user;
-    } catch (e) {
+    } catch (e: any) {
       HandleThrowError('Token must be a valid token', 401);
     }
     next();
