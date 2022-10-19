@@ -1,10 +1,6 @@
 # Futebol-clube-back-end
 
-Mais uma aplicação com foco em back-end desenvolvida durante o projeto feito na escola Trybe.
-
-Este foi um projeto divisor de águas, onde finalmente fiz uma aplicação usando Programação Orientada a Objetos e aplicando o SOLID. Estou muito feliz de ter chegado nesse patamar do meu aprendizado, confesso que eu estava ansioso.
-
-Resumidamente esta é uma aplicação com o tema Futebol onde é possível inserir partidas e obter as pontuações dos jogos de forma organizada. A aplicação também acompanha o front para a melhor visualização das informações, mas o foco aqui é o back-end que foi a parte desenvolvida neste projeto.
+Esta é uma aplicação com o tema Futebol onde é possível inserir partidas e obter as pontuações dos jogos de forma organizada. A aplicação também acompanha o front para a melhor visualização das informações.
 
 ## Como rodar a aplicação?
 
