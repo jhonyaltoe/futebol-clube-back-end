@@ -7,7 +7,7 @@ export default class MatcheController {
     private matcheService: IMatcheService,
   ) {}
 
-  public getAll = controllerWrapper(async (req: Request, res: Response) => {
+  public getAll = controllerWrapper(async (_req: Request, res: Response) => {
     const matches = await this.matcheService.getAll();
     res.status(200).json(matches);
   });
