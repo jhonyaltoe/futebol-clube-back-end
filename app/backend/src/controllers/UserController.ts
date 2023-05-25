@@ -15,7 +15,6 @@ export default class UserController {
 
   public loginValidate: RequestHandler = controllerWrapper(async (req: Request, res: Response) => {
     const role: Role = await this.userService.loginValidate(req.body.userAuth.email as string);
-    console.log(req.body);
     return res.status(200).json({ role });
   });
 }
