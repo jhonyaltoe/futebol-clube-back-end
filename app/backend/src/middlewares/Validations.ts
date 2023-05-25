@@ -1,9 +1,10 @@
 import { Response, Request, NextFunction } from 'express';
 import { Joi, HandleThrowError } from '../utils';
+import { Login } from '../utils/Joi/loginShema';
 
 class Validations {
   public static loginValidation = (req: Request, _res: Response, next: NextFunction) => {
-    const login = req.body;
+    const login: Login = req.body;
     Joi.joiValidateLogin(login);
     next();
   };

@@ -1,6 +1,8 @@
 import * as Joi from 'joi';
 import HandleThrowError from '../ErrorHandle';
 
+export type Login = { email: string, password: string };
+
 const ALL_FILDEDS_MUST_BE_FILLED = 'All fields must be filled';
 
 const loginShema = Joi.object({
@@ -22,7 +24,7 @@ const loginShema = Joi.object({
     }),
 });
 
-const joiValidateLogin = (login: { email: string, senha: string }): void => {
+const joiValidateLogin = (login: Login): void => {
   const { error } = loginShema.validate(login);
   if (error) HandleThrowError(error.message, 400);
 };

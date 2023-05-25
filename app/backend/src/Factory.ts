@@ -1,4 +1,4 @@
-import { jwtGenerator, Leaderboard } from './utils';
+import { Leaderboard } from './utils';
 
 import UserRepository from './database/repository/UserRepository';
 import UserService from './services/UserService/UserService';
@@ -17,7 +17,7 @@ import LeaderboardController from './controllers/LeaderboardController';
 export default class Factory {
   public static user() {
     const userRepository = new UserRepository();
-    const userService = new UserService(userRepository, jwtGenerator);
+    const userService = new UserService(userRepository);
     const userController = new UserController(userService);
     return userController;
   }
