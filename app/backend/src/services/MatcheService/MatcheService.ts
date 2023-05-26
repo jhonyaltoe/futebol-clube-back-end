@@ -1,4 +1,4 @@
-import { IMatche, IMatcheCreate, IMatcheFKV, ITeamGoals } from '../../database/entities';
+import { IMatche, MatcheCreate, IMatcheFKV, ITeamGoals } from '../../database/entities';
 import IMatcheService from './IMatcheService';
 import MatcheRepository from '../../database/repository/MatcheRepository';
 import TeamRepository from '../../database/repository/TeamRepository';
@@ -20,7 +20,7 @@ export default class MatcheService implements IMatcheService {
     return matches as IMatcheFKV[];
   }
 
-  public async createMatch(matche: IMatcheCreate): Promise<IMatche> {
+  public async createMatch(matche: MatcheCreate): Promise<IMatche> {
     const toVerify = [matche.homeTeam, matche.awayTeam];
     await Promise.all(toVerify.map((teamId) => this.verifyIfHasTeam(teamId)));
     const newMatche = await this.matcheRepository.createMatch(matche);

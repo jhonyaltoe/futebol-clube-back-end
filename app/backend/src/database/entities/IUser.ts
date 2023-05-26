@@ -3,7 +3,7 @@ export interface ILogin {
   password: string;
 }
 
-export default interface IUser extends ILogin {
+export interface IUser extends ILogin {
   id: number,
   username: string;
   role: string;

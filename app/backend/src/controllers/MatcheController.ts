@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import IMatcheService from '../services/MatcheService/IMatcheService';
 import { controllerWrapper } from '../utils';
+import { MatcheCreate } from '../database/entities';
 
 export default class MatcheController {
   constructor(
@@ -13,7 +14,7 @@ export default class MatcheController {
   });
 
   public createMatch = controllerWrapper(async (req: Request, res: Response) => {
-    const newMatche = await this.matcheService.createMatch(req.body);
+    const newMatche = await this.matcheService.createMatch(req.body as MatcheCreate);
     res.status(201).json(newMatche);
   });
 

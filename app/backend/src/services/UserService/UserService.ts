@@ -1,6 +1,6 @@
 import { compare } from 'bcryptjs';
 import { jwtGenerator, HandleThrowError } from '../../utils';
-import IUser, { ILogin } from '../../database/entities/IUser';
+import { IUser, ILogin } from '../../database/entities/IUser';
 import UserRepository from '../../database/repository/UserRepository';
 import IUserService, { Token, Role } from './IUserService';
 

@@ -1,5 +1,5 @@
 import User from '../models/User';
-import IUser from '../entities/IUser';
+import { IUser } from '../entities/IUser';
 import { Role } from '../../services/UserService/IUserService';
 
 export default class UserRepository {

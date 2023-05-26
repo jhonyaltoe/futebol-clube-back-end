@@ -1,4 +1,4 @@
-import ITeam from '../../database/entities/ITeam';
+import { ITeam } from '../../database/entities/ITeam';
 import ITeamService from './ITeamService';
 
 export default class TeamService implements ITeamService<ITeam> {

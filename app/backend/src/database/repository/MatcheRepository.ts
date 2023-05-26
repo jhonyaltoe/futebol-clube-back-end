@@ -1,6 +1,6 @@
 import Matche from '../models/Matche';
 import Team from '../models/Team';
-import { IMatcheCreate, IMatche, ITeamGoals, IMatcheFKV } from '../entities';
+import { MatcheCreate, IMatche, ITeamGoals, IMatcheFKV } from '../entities';
 
 export default class MatcheRepository {
   private matcheModel = Matche;
@@ -19,7 +19,7 @@ export default class MatcheRepository {
     return matches as IMatcheFKV[];
   }
 
-  public async createMatch(matche: IMatcheCreate): Promise<IMatche> {
+  public async createMatch(matche: MatcheCreate): Promise<IMatche> {
     const newMatche = await this.matcheModel.create({ ...matche });
     return newMatche;
   }
