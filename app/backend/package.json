@@ -4,12 +4,12 @@
   "description": "",
   "main": "./build/server",
   "scripts": {
-    "build": "/bin/sh tsc_eval.sh",
+    "build": "tsc",
     "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
     "test:coverage": "nyc npm run test",
     "test:coverage:json": "nyc --reporter=json-summary npm run test",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "start": "node .",
+    "start": "node ./build/server.js",
     "predev": "npm run build && npm run db:reset",
     "dev": "nodemon -L --watch \"./src/**\" ./src/server.ts",
     "lint": "eslint ./src --ext .ts"
