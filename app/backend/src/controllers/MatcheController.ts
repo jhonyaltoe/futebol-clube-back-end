@@ -25,7 +25,11 @@ export default class MatcheController {
   public finishMatch = controllerWrapper(async (req: Request, res: Response) => {
     const { id } = req.params;
     const finish = await this.matcheService.finishMatch(Number(id));
-    res.status(200).json(finish);
+    if (finish.status) {
+      res.sendStatus(finish.status);
+      return;
+    }
+    res.status(200).json(finish.message);
   });
 
   public update = controllerWrapper(async (req: Request, res: Response) => {

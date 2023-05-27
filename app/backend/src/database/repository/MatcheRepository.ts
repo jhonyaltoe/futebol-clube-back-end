@@ -24,9 +24,9 @@ export default class MatcheRepository {
     return newMatche;
   }
 
-  public async finishMatch(id: number): Promise<{ message: 'Finished' }> {
-    await this.matcheModel.update({ inProgress: 0 }, { where: { id } });
-    return { message: 'Finished' };
+  public async finishMatch(id: number): Promise<number> {
+    const [updatedItemsQtt] = await this.matcheModel.update({ inProgress: 0 }, { where: { id } });
+    return updatedItemsQtt;
   }
 
   public async update(id: number, teamGoals: ITeamGoals): Promise<void> {

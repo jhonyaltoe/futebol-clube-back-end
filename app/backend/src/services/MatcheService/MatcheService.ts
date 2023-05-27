@@ -1,5 +1,5 @@
 import { IMatche, MatcheCreate, IMatcheFKV, ITeamGoals } from '../../database/entities';
-import IMatcheService from './IMatcheService';
+import IMatcheService, { IFinishMatchReturn } from './IMatcheService';
 import MatcheRepository from '../../database/repository/MatcheRepository';
 import TeamRepository from '../../database/repository/TeamRepository';
 import { HandleThrowError } from '../../utils';
@@ -27,9 +27,10 @@ export default class MatcheService implements IMatcheService {
     return newMatche;
   }
 
-  public async finishMatch(id: number): Promise<{ message: 'Finished' }> {
-    const finish = await this.matcheRepository.finishMatch(id);
-    return finish;
+  public async finishMatch(id: number): Promise<IFinishMatchReturn> {
+    const updatedItemsQtt = await this.matcheRepository.finishMatch(id);
+    if (updatedItemsQtt === 0) return { status: 304 };
+    return { message: 'Finished' };
   }
 
   public async update(id: number, teamGoals: ITeamGoals): Promise<void> {
