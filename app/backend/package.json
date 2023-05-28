@@ -8,7 +8,7 @@
     "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit",
     "test:coverage": "nyc npm run test",
     "test:coverage:json": "nyc --reporter=json-summary npm run test",
-    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "db:reset": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "start": "node ./build/server.js",
     "predev": "npm run build && npm run db:reset",
     "dev": "nodemon -L --watch \"./src/**\" ./src/server.ts",
@@ -50,6 +50,7 @@
     "typescript": "4.4.4"
   },
   "dependencies": {
+    "@vercel/postgres": "^0.3.0",
     "bcryptjs": "2.4.3",
     "cors": "2.8.5",
     "dotenv": "10.0.0",
@@ -58,6 +59,7 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "8.5.1",
     "mysql2": "2.3.3",
+    "pg": "^8.11.0",
     "sequelize": "6.9.0"
   }
 }
