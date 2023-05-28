@@ -9,8 +9,8 @@ export default class TeamController {
   ) {}
 
   public getAll: RequestHandler = controllerWrapper(async (_req: Request, res: Response) => {
-    // const teams = await this.team.getAll();
-    res.status(200).json('teams');
+    const teams = await this.team.getAll();
+    res.status(200).json(teams);
   });
 
   public getOne: RequestHandler = controllerWrapper(async (req: Request, res: Response) => {
