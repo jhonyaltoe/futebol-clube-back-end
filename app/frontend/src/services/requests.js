@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: `http://localhost:${process.env.REACT_APP_API_PORT || '3001'}`,
+  baseURL: process.env.BASE_URL_API || `http://localhost:${process.env.REACT_APP_API_LOCAL_PORT || '3001'}`,
 });
 
 export const setToken = (token) => {
@@ -10,6 +10,7 @@ export const setToken = (token) => {
 
 export const requestData = async (endpoint) => {
   const { data } = await api.get(endpoint);
+  console.log(data)
   return data;
 };
 
