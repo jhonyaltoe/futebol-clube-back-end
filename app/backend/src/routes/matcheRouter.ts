@@ -5,7 +5,7 @@ import { Aunth, Validations } from '../middlewares';
 const matcheRouter = Router();
 const matcheController = Factory.matche();
 
-matcheRouter.get('/matches', matcheController.getAll);
+matcheRouter.get('/matches', Validations.matchesValidation, matcheController.getAll);
 matcheRouter.post(
   '/matches',
   Aunth.tokenJWT,

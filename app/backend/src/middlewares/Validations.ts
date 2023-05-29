@@ -21,6 +21,14 @@ class Validations {
     }
     next();
   };
+
+  public static matchesValidation = (req: Request, _res: Response, next: NextFunction) => {
+    const { inProgress } = req.query as { inProgress: 'true' | 'false' | undefined };
+    if (inProgress !== 'true' && inProgress !== 'false' && inProgress) {
+      HandleThrowError('The "inProgress" param should be "true" or "false"', 401);
+    }
+    next();
+  };
 }
 
 export default Validations;
