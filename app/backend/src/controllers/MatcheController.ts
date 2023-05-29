@@ -12,8 +12,11 @@ export default class MatcheController {
     private matcheService: IMatcheService,
   ) {}
 
-  public getAll = controllerWrapper(async (_req: Request, res: Response) => {
-    const matches = await this.matcheService.getAll();
+  public getAll = controllerWrapper(async (req: Request, res: Response) => {
+    let where = {};
+    const { inProgress } = req.query as { inProgress: 'true' | 'false' | undefined };
+    if (inProgress) where = { inProgress: inProgress === 'true' };
+    const matches = await this.matcheService.getAll(where);
     res.status(200).json(matches);
   });
 
