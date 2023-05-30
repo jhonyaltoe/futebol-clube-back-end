@@ -38,7 +38,7 @@ Também existem dois níveis de login que já estão pré-definidos e autenticad
 - joi
 - jest
 
-[Ira para o sumário](#sumário)
+[Ir para o sumário](#sumário)
 
 ## **Não se preocupe com o ambiente de desenvolvimento.**
 
@@ -48,7 +48,7 @@ Com o Docker instalado você pode rodar todo o projeto sem maiores preocupaçõe
 
 Caso ainda não tenha instalado aqui está o [Docker Desktop](https://docs.docker.com/desktop/) com versão gráfica ou se preferir fazer tudo pelo terminal é no [Docker Engine](https://docs.docker.com/engine/), em ambos você só vai verificar qual o sistema operacional e seguir o passo-a-passo. Se tiver alguma dificuldade pode me chamar pelo meu [Linkedin](https://www.linkedin.com/in/jhony-altoe/), será um prazer ajudar.
 
-[Ira para o sumário](#sumário)
+[Ir para o sumário](#sumário)
 
 ## **Rodando a aplicação com o Docker**
 
@@ -104,10 +104,10 @@ Bem simples, não é?
 }
  ```
 
-[Ira para o sumário](#sumário)
+[Ir para o sumário](#sumário)
 
 ## **Documentação**
 
 Bem, eu fiz uma documentação bem bonita usando o postman então fique a vontade para conferir [aqui](https://documenter.getpostman.com/view/23798069/2s93m61MYC#a4036827-6cd1-4623-a479-619da4e5b722).
 
-[Ira para o sumário](#sumário)
+[Ir para o sumário](#sumário)
