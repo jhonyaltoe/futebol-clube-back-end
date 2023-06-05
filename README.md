@@ -1,4 +1,4 @@
-# Futebol-clube-back-end
+# Futebol Clube Back-end
 
 ## Entre em contato comigo
 
@@ -19,7 +19,7 @@ Também existem dois níveis de login que já estão pré-definidos e autenticad
 A aplicação é focada no back-end mas existe um front-end para os mais visuais, fique a vontade para testar a aplicação pelo front-end ou usando a API.
 
 ## **Sumário**
-- [Futebol-clube-back-end](#futebol-clube-back-end)
+- [Futebol Clube Back-end](#futebol-clube-back-end)
   - [Entre em contato comigo](#entre-em-contato-comigo)
   - [**Seja bem-vindo ao meu projeto back-end!**](#seja-bem-vindo-ao-meu-projeto-back-end)
     - [Existe um front-end](#existe-um-front-end)
@@ -73,7 +73,7 @@ Caso ainda não tenha instalado aqui está o [Docker Desktop](https://docs.docke
 
   `npm run compose:up:dev`
 
-**obs.:** dependendo da versão do docker compose será necessário modificar o script localizado no arquivo `package.json`. Não se assuste a diferença é mínima, somente um hífen a mais ou a menos no comando *docker compose*, veja:
+> **obs.:** dependendo da versão do docker compose será necessário modificar o script localizado no arquivo `package.json`. Não se assuste a diferença é mínima, somente um hífen a mais ou a menos no comando *docker compose*, veja:
 
 `docker-compose` ou `docker compose`
 
