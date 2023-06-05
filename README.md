@@ -113,6 +113,6 @@ Bem simples, não é?
 
 ## **Documentação**
 
-Bem, eu fiz uma documentação bem bonita usando o postman então fique a vontade para conferir [aqui](https://documenter.getpostman.com/view/23798069/2s93m61MYC#a4036827-6cd1-4623-a479-619da4e5b722).
+Bem, eu fiz uma documentação bem bonita usando o postman então fique a vontade para conferir [aqui](https://documenter.getpostman.com/view/23798069/2s93m61MYC).
 
 [Ir para o sumário](#sumário)
